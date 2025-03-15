@@ -1,16 +1,17 @@
 import React from "react";
-// import { startProfileEdit } from '../redux/authSlice';
-// import { AppDispatch } from '../redux/store';
+import { startProfileEdit } from "../../redux/feature/authSlices";
+import { AppDispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
 interface ProfileModifProps {
   firstName: string;
   userName: string;
 }
 const ProfileModif: React.FC<ProfileModifProps> = ({ firstName, userName }) => {
-  // const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   // We handle the click event to start editing the profile
-  // const handleEditClick = () => {
-  //   dispatch(startProfileEdit());
-  // };
+  const handleEditClick = () => {
+    dispatch(startProfileEdit());
+  };
   return (
     <section>
       <div className="header">
@@ -20,7 +21,9 @@ const ProfileModif: React.FC<ProfileModifProps> = ({ firstName, userName }) => {
           {`${firstName} ${userName} `}
           {/* Afficher le nom complet de l'utilisateur */}
         </h1>
-        <button className="edit-button">Edit Name</button>
+        <button className="edit-button" onClick={handleEditClick}>
+          Edit Name
+        </button>
       </div>
     </section>
   );
