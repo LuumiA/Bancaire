@@ -1,27 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./EditUserInfo.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserProfile } from "../../redux/feature/authActions";
+import { cancelProfileEdit } from "../../redux/feature/authSlices";
+import { AppDispatch, RootState } from "../../redux/store";
 
 export const EditUserInfo: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  // We retrieve user profile, loading, and error states from Redux store
+  const { user, loading, error } = useSelector(
+    (state: RootState) => state.auth
+  );
+  // We set local state for user information fields
+  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  // Effect to update local fields when userProfile changes
+  useEffect(() => {
+    if (user) {
+      setUserName(user.userName || "");
+      setFirstName(user.firstName || "");
+      setLastName(user.lastName || "");
+    }
+  }, [user]);
+  // We handle the save action to update the userName
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // We dispatch the action to update userName
+      // unwrap() is used to directly get the result of the action (success or failure)
+      await dispatch(updateUserProfile(userName)).unwrap();
+      console.log("UserName updated successfully");
+    } catch (error) {
+      console.error("Error while updating user profile:", error);
+    }
+  };
+  // We handle the cancel action to exit edit mode
+  const handleCancel = () => {
+    dispatch(cancelProfileEdit());
+  };
+  // We display loading and error messages if necessary
+  if (loading) return <p>Loading profile...</p>;
+  if (error) return <p>Error loading profile: {error}</p>;
+
   return (
-    <form className="edit-user-info">
+    <form className="edit-user-info " onSubmit={handleSave}>
       <h1>Edit user info</h1>
       <div className="form-element">
         <label htmlFor="username">User name:</label>
-        <input type="text" id="username" value="" readOnly />
+        <input
+          type="text"
+          id="username"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
       </div>
       <div className="form-element">
         <label htmlFor="firstName">First name:</label>
-        <input type="text" id="firstName" value="" disabled />
+        <input type="text" id="firstName" value={firstName} disabled />
       </div>
       <div className="form-element">
         <label htmlFor="lastName">Last name:</label>
-        <input type="text" id="lastName" value="" disabled />
+        <input type="text" id="lastName" value={lastName} disabled />
       </div>
       <div className="button-container">
-        <button type="button" className="save-button">
+        <button type="submit" className="save-button">
           Save
         </button>
-        <button type="button" className="cancel-button">
+        <button type="button" className="cancel-button" onClick={handleCancel}>
           Cancel
         </button>
       </div>
