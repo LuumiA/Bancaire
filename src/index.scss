@@ -5,6 +5,10 @@ html {
   text-align: center;
   color: #2c3e50;
 }
+html,
+body {
+  height: 100%; /* pour forcer le flex à prendre tout l'écran */
+}
 
 body {
   margin: 0;
@@ -15,6 +19,9 @@ body {
 
 .main {
   flex: 1;
+  margin-bottom: 25px;
+  width: auto;
+  height: 1000px;
 }
 
 .bg-dark {
@@ -80,6 +87,10 @@ body {
 .main-nav-logo-image {
   max-width: 100%;
   width: 270px;
+}
+
+.fa-user-circle {
+  margin-left: 0.5rem;
 }
 
 .hero {
@@ -222,7 +233,8 @@ body {
   display: flex;
   justify-content: center;
   border-top: 2px solid #ccc;
-  padding: 2rem 0 1.5rem;
+  margin-top: auto;
+  padding: 2rem 0;
 }
 
 .footer-text {
