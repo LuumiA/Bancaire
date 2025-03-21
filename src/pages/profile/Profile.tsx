@@ -65,7 +65,9 @@ const Profile: React.FC = () => {
         )}
         <section>
           <h2 className="sr-only">Accounts</h2>
-          <Account accounts={accountsData} />
+          {accountsData.map((accountData) => (
+            <Account account={accountData} key={accountData.title} />
+          ))}
         </section>
       </main>
       <Footer />
