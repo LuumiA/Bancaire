@@ -47,8 +47,14 @@ const Home: React.FC = () => {
         </div>
         <section className="features">
           <h2 className="sr-only">Features</h2>
-          {features.map((feature, index) => (
-            <Feature key={index} {...feature} />
+          {features.map((feature) => (
+            <Feature
+              key={feature.title}
+              icon={feature.icon}
+              alt={feature.alt}
+              title={feature.title}
+              description={feature.description}
+            />
           ))}
         </section>
       </main>
