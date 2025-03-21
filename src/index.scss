@@ -324,3 +324,28 @@ body {
     width: 200px;
   }
 }
+
+/* Style spécifique à la page d'erreur */
+.error-page-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(
+    100vh - 150px
+  ); /* Ajustez en fonction de la hauteur de votre header et footer */
+}
+
+.error-container {
+  text-align: center;
+  color: #fff;
+}
+
+.error-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.error-text {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}

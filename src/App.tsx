@@ -6,6 +6,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
+import ErrorPage from "./components/errorPages/ErrorPages";
 
 export const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const App: React.FC = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
   );
