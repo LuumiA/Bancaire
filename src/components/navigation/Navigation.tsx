@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import logo from "../../assets/img/argentBankLogo.png";
+import logo from "../../assets/img/argentBankLogo.webp";
 import { NavLink } from "react-router-dom";
 import { AppDispatch } from "../../redux/store";
 import { logout } from "../../redux/feature/authSlices";
